@@ -359,17 +359,16 @@ footer .wrap{display:flex;flex-direction:column;gap:40px}
     ["1edp36f5m6w","PX3","1:35","il y a 6 ans"]
   ];
   const A="https://is1-ssl.mzstatic.com/image/thumb/";
-  const AM="https://music.apple.com/fr/album/";
-  // [titre, sous-titre, année, chemin de pochette Apple (null = pas de pochette), lien]
+  // [titre, sous-titre, année, pochette, lien Spotify (null = page artiste Spotify)]
   const releases=[
-    ["SIO 2","Summer Is Over Negro EP","2025","Music211/v4/07/00/51/070051f8-9929-7b47-8e79-c6a47c628d27",AM+"sio-2-summer-is-over-2-single/1842066971"],
-    ["BUBBLE II","Projet","2024","Music211/v4/15/01/c2/1501c216-ee7f-3947-18ae-4fd58afe73d9",AM+"bubble-ii/1764745321"],
+    ["SIO 2","Summer Is Over 2","2025","Music211/v4/07/00/51/070051f8-9929-7b47-8e79-c6a47c628d27","https://open.spotify.com/album/7iKh451BUTFMeXLcn90pjB"],
+    ["BUBBLE II","","2024","Music211/v4/15/01/c2/1501c216-ee7f-3947-18ae-4fd58afe73d9","https://open.spotify.com/album/1ibop5ZBRz8Al4hpzQz7bp"],
     ["BUBBLE","EP","2022","https://i.scdn.co/image/ab67616d0000b273ceb536cc117359dedb097814","https://open.spotify.com/album/5aMIYPSCPZTI07Isp7RvPU"],
-    ["BLUE LAGOON","Projet","2021","Music112/v4/5d/71/b6/5d71b6f9-2181-6273-c4c6-859e68eb6bc8",AM+"blue-lagoon/1636738852"],
-    ["RED MOON","Projet","2021","Music112/v4/8d/1e/0c/8d1e0ccd-8369-142a-4abc-52352315d287",AM+"red-moon/1633644019"],
+    ["BLUE LAGOON","","2021","Music112/v4/5d/71/b6/5d71b6f9-2181-6273-c4c6-859e68eb6bc8","https://open.spotify.com/album/52g3HpzXftMwfpH0cZx5LJ"],
+    ["RED MOON","","2021","Music112/v4/8d/1e/0c/8d1e0ccd-8369-142a-4abc-52352315d287",null],
     ["SIO","Summer Is Over · EP","2019","https://i.scdn.co/image/ab67616d0000b273dab38458f19ef457bbfbd78f","https://open.spotify.com/album/3uXYyYxJeVO4Sja1i9WR7H"],
-    ["MADNESS","Projet","2018","Music116/v4/e6/87/7b/e6877b69-92d3-8085-3f2c-2104a1994ee0",AM+"madness/1682333339"],
-    ["L'AUBE","Projet","2016","Music122/v4/8b/99/b7/8b99b75e-21da-bd6c-688c-25b0bb843c7e",AM+"laube/1646581645"]
+    ["MADNESS","","2018","Music116/v4/e6/87/7b/e6877b69-92d3-8085-3f2c-2104a1994ee0",null],
+    ["L'AUBE","","2016","Music122/v4/8b/99/b7/8b99b75e-21da-bd6c-688c-25b0bb843c7e","https://open.spotify.com/album/5Vp5BPhoUyMHRuhY3yJLEJ"]
   ];
   const SP="https://open.spotify.com/intl-fr/artist/361nx5PUA8KryEsJ7ghIcN";
   const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -381,7 +380,7 @@ footer .wrap{display:flex;flex-direction:column;gap:40px}
   document.getElementById('coverGrid').innerHTML=releases.map(([t,kind,y,p,url])=>
     `<a class="rel rv" href="${url||SP}" target="_blank" rel="noopener">
       <span class="cover${p?'':' noart'}"><span class="fb">${esc(t)}</span>${p?`<img src="${p.startsWith('http')?p:A+p+'/artwork.jpg/600x600bb.jpg'}" alt="Cover ${esc(t)}" loading="lazy" onerror="this.remove()">`:''}</span>
-      <span class="yr">${y}</span><b>${esc(t)}</b><small>${kind}</small></a>`).join('');
+      <span class="yr">${y}</span><b>${esc(t)}</b>${kind?`<small>${esc(kind)}</small>`:''}</a>`).join('');
 
   // header: transparent over the hero, solid after
   const hdr=document.getElementById('hdr');
